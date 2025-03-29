@@ -1,0 +1,25 @@
+name: docker
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Build and publish a Docker image for ${{ github.repository }}
+        uses: macbre/push-to-ghcr@master
+        with:
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull and Up docker image on cloud server
+        uses: appleboy/ssh-action@master
+        with:
+          host: iris-agent.cloud.banksia.global
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          script: |
+            sudo docker login ghcr.io -u USERNAME -p ${{ secrets.GITHUB_TOKEN }};
+            sudo docker-compose pull;
+            sudo docker-compose up -d;
+            sudo docker system prune -f

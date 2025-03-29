@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="bg-iris-agent.ZPM">
+    <Module>
+      <Name>bg-iris-agent</Name>
+      <Version>1.1.2</Version>
+      <Packaging>module</Packaging>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="Banksia.IrisAgent.PKG"/>
+      <Resource Name="Banksia.Sql.CLS"/>
+      <Resource Name="Banksia.INC"/>
+      <Resource Name="Production.PKG"/>
+      <CSPApplication
+        Url="/interoperability"
+        DispatchClass="Banksia.IrisAgent.RestService"
+        MatchRoles=":%All"
+        DelegatedAuthEnabled="0"
+        Recurse="1"
+        UseCookies="0"
+      />
+    </Module>
+  </Document>
+</Export>

@@ -1,0 +1,30 @@
+{
+  "name": "bg-iris-agent-mcp-bridge",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server that bridges Claude with a REST API defined by OpenAPI",
+  "main": "build/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc && node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "openapi",
+    "banksia-global"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.5.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

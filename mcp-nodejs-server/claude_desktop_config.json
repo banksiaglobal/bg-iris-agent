@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "bg-iris-agent": {
+            "command": "node",
+            "args": [
+                "<your_local_path>/bg-iris-agent/mcp-nodejs-server/build/index.js"
+            ],
+            "env": {
+                "API_KEY": "YourApiKey"
+            }
+        }
+    }
+}
