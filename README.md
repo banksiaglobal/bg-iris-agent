@@ -206,4 +206,4 @@ Then go to **"Authentication"** section.
 
 We are the team of Banksia Global company and we always are opened for something new and interesting!
 
-\#BanksiaGlobal #AITools #GenerativeAI #AI #AObjectScript #InterSystems 
+\#BanksiaGlobal #AITools #GenerativeAI #AI #ObjectScript #InterSystems 

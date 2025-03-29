@@ -134,8 +134,6 @@ ClassMethod ValidateApiKey(ByRef pContinue As %Boolean) As %Status
 Method GetOpenApi(pInput As %Library.AbstractStream, pOutput As %Library.AbstractStream)
 {
     set urlHost = $select(%request.Secure:"https://", 1:"http://")_%request.GetCgiEnv("HTTP_HOST")
-    $$$TRACE("secure :"_%request.Secure)
-    $$$TRACE("url host :" _urlHost)
     set ConfigItem = ##class(Ens.Config.Production).OpenItemByConfigName(..%ConfigName)
     set api = {
         "openapi": "3.1.0",
