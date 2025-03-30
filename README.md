@@ -68,16 +68,14 @@ The functioning of the system can be seen most clearly in the visual traces. The
 You can get acquainted with the open API scheme by following
 the link:
 ```
-http://localhost:52773/interoperability/LanguageModelIn/
-openapi
+http://localhost:52773/interoperability/LanguageModelIn/openapi
 ```
 ![Image_4](./readme_image/image_4.png)
 
 Generate an API key to securely connect your portal to AI
 tools:
 ```
-http://localhost:52773/interoperability/LanguageModelIn/
-createapikey
+http://localhost:52773/interoperability/LanguageModelIn/createapikey
 ```
 After generating the key, it will automatically be available
 for connection to the Claude AI.
@@ -85,7 +83,7 @@ for connection to the Claude AI.
 
 # Video
 
-[BG-Iris-Agent](тут будет актуальная ссылка)
+[BG-Iris-Agent](https://youtu.be/F4d_HkZ6iRo)
 
 # **1. Run locally with Claude AI Desktop**
 ## How to Run
