@@ -3,13 +3,6 @@
 {
 	"name": "bg-iris-agent devcontainer",
 
-	// Use the same recipe as creates the container we use when working locally.
-	"dockerComposeFile": [
-		"../docker-compose.yml"
-	],
-
-	"service": "iris",
-
 	"workspaceFolder": "/home/irisowner/dev",
 
 	"customizations": {
@@ -20,17 +13,15 @@
 			// Server Manager can also be used.
 			"settings": {
 				"objectscript.conn" :{
-					"server": "devcontainer",
+					"server": "remote",
 					"active": true
 				},
 				"intersystems.servers": {
-					"devcontainer": {
-						"username": "SuperUser",
-						"password": "SYS",
+					"remote": {
 						"webServer": {
-							"scheme": "http",
-							"host": "127.0.0.1",
-							"port": 52773
+							"scheme": "https",
+							"host": "iris-agent.cloud.banksia.global",
+							"port": 443
 						}
 					}
 				},
