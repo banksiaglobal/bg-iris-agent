@@ -5,6 +5,8 @@
 
 	"workspaceFolder": "/home/irisowner/dev",
 
+	"image": "nginx",
+
 	"customizations": {
 		"vscode": {
 			// This provides the elements of the connection object which require different values when connecting to the workspace within the container,
