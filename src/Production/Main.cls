@@ -8,7 +8,7 @@ XData ProductionDefinition
   <ActorPoolSize>2</ActorPoolSize>
   <Item Name="LanguageModelIn" Category="" ClassName="Banksia.IrisAgent.RestService" PoolSize="1" Enabled="true" Foreground="false" Comment="Banksia Iris Agent Server" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="Port"></Setting>
-    <Setting Target="Host" Name="TargetConfigNames">Users,Metrics,Namespaces,Meds</Setting>
+    <Setting Target="Host" Name="TargetConfigNames">Users,Metrics,Namespaces,Meds,Weather</Setting>
   </Item>
   <Item Name="Users" Category="" ClassName="Production.Operation.Users" PoolSize="1" Enabled="true" Foreground="false" Comment="API for retrieving, searching and create/delete users in the Banksia Iris Agent system." LogTraceEvents="true" Schedule="">
   </Item>
@@ -17,6 +17,9 @@ XData ProductionDefinition
     <Item Name="Namespaces" Category="" ClassName="Production.Operation.Namespaces" PoolSize="1" Enabled="true" Foreground="false" Comment="API for retrieving, searching and modifying namespaces in the Banksia Iris Agent system." LogTraceEvents="true" Schedule="">
   </Item>
   <Item Name="Meds" Category="" ClassName="Production.Operation.FindMeds" PoolSize="1" Enabled="true" Foreground="false" Comment="API for retrieving and searching information in the external API through Banksia Iris Agent system." LogTraceEvents="true" Schedule="">
+  <Setting Target="Adapter" Name="SSLConfig">pm.community.intersystems.com</Setting>
+  </Item>
+  <Item Name="Weather" Category="" ClassName="Production.Operation.Weather" PoolSize="1" Enabled="true" Foreground="false" Comment="API for retrieving and searching weather information in the external API through Banksia Iris Agent system." LogTraceEvents="true" Schedule="">
   <Setting Target="Adapter" Name="SSLConfig">pm.community.intersystems.com</Setting>
   </Item>
 </Production>
