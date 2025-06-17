@@ -83,18 +83,20 @@ Method CreateApiKey(pInput As %Library.AbstractStream, pOutput As %Library.Abstr
 {
     set sc = $$$OK
     try {
-        set ApiKey=$get(^SecretApiKey)
-        if ApiKey="" {
-            set ApiKey=##class(%PopulateUtils).StringMin(64,64)
-            set ApiKey=$$$BASE64URLENCODE(ApiKey)
-            set ^SecretApiKey=ApiKey
+        if '##class(Ens.Config.Credentials).%ExistsId("ApiKey") {
+            set ApiKey=$get(%request.Data("ApiKey",1))            
+            if ApiKey="" {
+                set ApiKey=##class(%PopulateUtils).StringMin(64,64)
+                set ApiKey=$$$BASE64URLENCODE(ApiKey)
+            }
+            set sc = ##class(Ens.Config.Credentials).SetCredential("ApiKey","ApiKey",ApiKey,1)
             set result = {
-                "Api Key status": "Api key has been succesfully created. Check it in Portal -> System -> Globals by SecretApiKey name."
+                "Api Key status": "Api key has been succesfully created. Check it in Portal Credentials."
             }
         }
         else {
             set result = {
-                "Api Key status": "Api key has already been created. Check it in Portal -> System -> Globals by SecretApiKey name."
+                "Api Key status": "Api key has already been created. Check it in Portal Credentials."
             }
         }
     }
@@ -108,7 +110,7 @@ Method CreateApiKey(pInput As %Library.AbstractStream, pOutput As %Library.Abstr
 ClassMethod ValidateApiKey(ByRef pContinue As %Boolean) As %Status
 {
   set tSC = $$$OK
-    set ApiKeyGlobal=$get(^SecretApiKey)
+    set ApiKeyGlobal=##class(Ens.Config.Credentials).GetValue("ApiKey","Password")
     #dim request as %CSP.Request 
     set request = %request
     set apiKeyRequest = ##class(%REST.Impl).%GetHeader("X-Api-Key")
