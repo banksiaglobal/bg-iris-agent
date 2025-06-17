@@ -99,48 +99,12 @@ Method DeleteUserByName(pInput As Production.Message.DeleteUserIn, Output pOutpu
 {
     set tSC = $$$OK
     set response = {}
-    set IsUserExists = ..checkUserExists(pInput.Name)
-    if 'IsUserExists {
-        set stream = ##class(%Stream.GlobalCharacter).%New()
-        set response = {"errorCode": 404, "message": "Conflict: User does not exist"}
-        do response.%ToJSON(stream)
-        set pOutput = ##class(Ens.StreamContainer).%New(stream)
-        do pOutput.%Save(0)
-        quit tSC
-    }
-
-    /// Temporary code to switch to User with correct permissions
-    set tSC = $system.Security.Login("_SYSTEM", "SYS")
-    if $$$ISERR(tSC) {
-        set response.status = 403
-        set response = {"error": "Authentication failed"}
-        do pOutput.Write(response.%ToJSON())
-        quit $$$ERROR($$$GeneralError, "Authentication failed")
-        }
-
-    
-    set sqlQuery = "DROP USER IF EXISTS "_pInput.Name
-    try {
-        set stmt = ##class(%SQL.Statement).%New()
-        set result = stmt.%Prepare(sqlQuery)
-        set result = stmt.%Execute()
-        if result '= $$$OK {
-            set tSC = $$$ERROR($$$GeneralError, "Unable to delete user")
-            quit
-        }
-    } catch ex {
-        write "Exception: "_ex.Message, !
-        set tSC = $$$ERROR($$$GeneralError, "Unable to delete user")
-        quit
-    }
-    
-    set response.Username = pInput.Name
-    set response.log ="User deleted successfully"
     set stream = ##class(%Stream.GlobalCharacter).%New()
+    set response = {"errorCode": 403, "message": "Forbidden: Delete user is not allowed"}
     do response.%ToJSON(stream)
     set pOutput = ##class(Ens.StreamContainer).%New(stream)
     do pOutput.%Save(0)
-    return $$$OK
+    quit tSC
 }
 
 Method checkUserExists(pName As %String) As %Boolean

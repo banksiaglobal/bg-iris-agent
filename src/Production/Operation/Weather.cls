@@ -2,26 +2,13 @@
 Class Production.Operation.Weather Extends EnsLib.REST.Operation
 {
 
-Parameter INVOCATION = "Queue";
-
-Parameter OpenApiServer = "api.open-meteo.com";
-
-Parameter OpenApiUrl = "v1/forecast?";
-
 Method GetWeather(pInput As Production.Message.GetWeather, Output pOutput As Ens.StreamContainer) As %Status
 {
     set tSC = $$$OK
     try {
-        // Prepare and log the call
-        set ..Adapter.URL = ..#OpenApiUrl
-        set ..Adapter.HTTPServer = ..#OpenApiServer
-        
-        set tURL=..Adapter.URL_"latitude="_pInput.Lattitude_"&longitude="_pInput.Longitude_"&current=temperature_2m,rain"
-        
-        // Execute the call
+        set tURL=..Adapter.URL_"?latitude="_pInput.Lattitude_"&longitude="_pInput.Longitude_"&current=temperature_2m,rain"
         set tSC=..Adapter.GetURL(tURL,.tHttpResponse)
         set statusCode = tHttpResponse.StatusCode
-        // Return the response
         if $$$ISERR(tSC) && $isobject(tHttpResponse) && $isobject(tHttpResponse.Data) && tHttpResponse.Data.Size && statusCode '= 200 {
             set errorMessage = tHttpResponse.Data.Read()
             set response = ##class(%DynamicObject).%New()

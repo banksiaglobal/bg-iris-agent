@@ -1,24 +1,25 @@
-Class Production.Operation.FindMeds Extends EnsLib.REST.Operation
+/// Control user's light
+Class Production.Operation.Light Extends EnsLib.REST.Operation
 {
 
-Method ListMeds(pInput As Production.Message.ListMedsIn, Output pOutput As Ens.StreamContainer) As %Status
+Method SetLight(pInput As Production.Message.SetLight, Output pOutput As Ens.StreamContainer) As %Status
 {
     set tSC = $$$OK
     try {
-
-        if $find(pInput.Name, " ") '= 0 {
-            set Name = $replace(pInput.Name," ","+")
-        } else {
-            set Name = pInput.Name
-        }
-        set tURL=..Adapter.URL_"?search=brand_name:"_Name_"*&limit=20"
         
-        if pInput.Limit '= "" {
-            set tURL=..Adapter.URL_"?search=brand_name:"_Name_"*&limit="_pInput.Limit
+        set json={"duration": 1,"fast":false}
+        if pInput.State set json.power=pInput.State
+        if pInput.Color="Red" set json.color="kelvin:1500"
+        if pInput.Color="White" set json.color="kelvin:3500"
+        if pInput.Color="Cold" set json.color="kelvin:5000"
+        if pInput.Brightness set json.brightness=pInput.Brightness/100
 
-        }
-        set tSC=..Adapter.GetURL(tURL,.tHttpResponse)
+        $$$TRACE("Light request: "_json.%ToJSON())
+ 
+        // Execute the call
+        set tSC=..Adapter.Put(.tHttpResponse,"",json.%ToJSON())
         set statusCode = tHttpResponse.StatusCode
+        // Return the response
         if $$$ISERR(tSC) && $isobject(tHttpResponse) && $isobject(tHttpResponse.Data) && tHttpResponse.Data.Size && statusCode >= 300 {
             set errorMessage = tHttpResponse.Data.Read()
             set response = ##class(%DynamicObject).%New()
@@ -49,8 +50,8 @@ Method ListMeds(pInput As Production.Message.ListMedsIn, Output pOutput As Ens.S
 XData MessageMap
 {
 <MapItems>
-    <MapItem MessageType="Production.Message.ListMedsIn">
-        <Method>ListMeds</Method>
+    <MapItem MessageType="Production.Message.SetLight">
+        <Method>SetLight</Method>
     </MapItem>
 </MapItems>
 }
