@@ -25,4 +25,4 @@ jobs:
             sudo docker system prune -f;
             sleep 20;
             sudo docker exec ubuntu_iris_1 iris session iris -U USER "##class(Ens.Config.Credentials).SetCredential(\"ApiKey\",\"ApiKey\",\"${{ secrets.API_KEY }}\",1)"  
-            sudo docker exec ubuntu_iris_1 iris session iris -U USER "##class(Ens.Config.Credentials).SetCredential(\"lifx\",\"${{ secrets.LIFX_API_KEY }}\",\"\",1)"  
+            sudo docker exec ubuntu_iris_1 iris session iris -U USER "##class(Ens.Config.Credentials).SetCredential(\"lifx\",\"${{ secrets.LIFX }}\",\"\",1)"  
