@@ -22,4 +22,6 @@ jobs:
             sudo echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin;
             sudo docker-compose pull;
             sudo docker-compose up -d;
-            sudo docker system prune -f
+            sudo docker system prune -f;
+            sudo docker exec ubuntu_iris_1 iris session iris -U USER "##class(Ens.Config.Credentials).SetCredential(\"ApiKey\",\"ApiKey\",\"${{ secrets.API_KEY }}\",1)"  
+            sudo docker exec ubuntu_iris_1 iris session iris -U USER "##class(Ens.Config.Credentials).SetCredential(\"lifx\",\"${{ secrets.LIFX_API_KEY }}\",\"\",1)"  
