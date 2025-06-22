@@ -23,6 +23,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="Weather" Category="" ClassName="Production.Operation.Weather" PoolSize="1" Enabled="true" Foreground="false" Comment="API for retrieving and searching weather information in the external API through Banksia Iris Agent system." LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="SSLConfig">pm.community.intersystems.com</Setting>
+    <Setting Target="Adapter" Name="HTTPServer">api.open-meteo.com</Setting>
+    <Setting Target="Adapter" Name="URL">v1/forecast</Setting>
   </Item>
   <Item Name="Light" Category="" ClassName="Production.Operation.Light" PoolSize="1" Enabled="true" Foreground="false" Comment="API for controlling user&apos;s light." LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="SSLConfig">pm.community.intersystems.com</Setting>
