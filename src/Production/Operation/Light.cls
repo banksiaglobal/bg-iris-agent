@@ -12,7 +12,7 @@ Method SetLight(pInput As Production.Message.SetLight, Output pOutput As Ens.Str
         if pInput.Color="Red" set json.color="kelvin:1500"
         if pInput.Color="White" set json.color="kelvin:3500"
         if pInput.Color="Cold" set json.color="kelvin:5000"
-        if pInput.Brightness set json.brightness=pInput.Brightness/100
+        if pInput.Brightness'="" set json.brightness=pInput.Brightness/100
 
         $$$TRACE("Light request: "_json.%ToJSON())
  
