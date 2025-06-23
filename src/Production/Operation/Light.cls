@@ -8,7 +8,7 @@ Method SetLight(pInput As Production.Message.SetLight, Output pOutput As Ens.Str
     try {
         
         set json={"duration": 1,"fast":false}
-        if pInput.State set json.power=$zconvert(pInput.State,"l")
+        if pInput.State'="" set json.power=$zconvert(pInput.State,"l")
         if pInput.Color="Red" set json.color="kelvin:1500"
         if pInput.Color="White" set json.color="kelvin:3500"
         if pInput.Color="Cold" set json.color="kelvin:5000"
